@@ -1,0 +1,30 @@
+.loading-details-block {
+    text-align: center;
+}
+
+.loading-details-block .loading-indicator-container {
+    display: inline-block;
+    position: relative;
+}
+
+.movie-details {
+    display: flex;
+    flex-direction: row;
+}
+
+.movie-details .movie-card {
+    flex-shrink: 0;
+    width: 300px;
+}
+
+.movie-details .movie-card .movie-card-img {
+    min-width: 200px;
+    min-height: 300px
+}
+
+.movie-details .movie-side-section {
+    margin-left: 10px;
+    border: 1px solid rgba(224,224,224,1);
+    padding: 0 10px;
+    flex-grow: 1;
+}
