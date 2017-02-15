@@ -4,9 +4,16 @@ const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const Bear = require('./models/bear')
 const router = require('./routes')
+const path = require('path')
 
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
+
+app.use(express.static('./build'))
+
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, './build', 'index.html'))
+})
 
 const port = process.env.PORT || 8080
 
