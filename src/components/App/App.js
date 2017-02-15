@@ -3,7 +3,7 @@ import MovieSearch from '../MovieSearch'
 import MainHeader from '../MainHeader'
 import { Route, Router, browserHistory } from 'react-router'
 import MovieDetailsContainer from '../../containers/MovieDetailsContainer'
-import SavedMovieList from '../../containers/SavedMovieList'
+import Home from '../Home'
 import './App.css'
 
 const App = () => {
@@ -12,7 +12,7 @@ const App = () => {
             <MainHeader />
             <MovieSearch />
             <Router history={browserHistory}>
-                <Route path="/" component={SavedMovieList} />
+                <Route path="/" component={Home} />
                 <Route path="movie" component={MovieDetailsContainer}/>
             </Router>
         </div>

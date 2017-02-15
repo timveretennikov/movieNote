@@ -22,6 +22,10 @@ class MovieRepo {
     static getMovieDetails (id) {
         return axios.get(`${apiPath}/movie/${id}`)
     }
+
+    static getPopularMovies () {
+        return axios.get(`${apiPath}/popular`)
+    }
 }
 
 export default MovieRepo

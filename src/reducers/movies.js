@@ -1,12 +1,14 @@
 import {
     MOVIE_SEARCH_SUCCESSFUL, MOVIE_DETAILS_RECEIVED, MOVIE_SAVE_SUCCESSFUL,
-    SAVED_MOVIES_RECEIVED, MOVIE_DELETE_SUCCESSFUL, MOVIE_DETAILS_REQUESTED
+    SAVED_MOVIES_RECEIVED, MOVIE_DELETE_SUCCESSFUL, MOVIE_DETAILS_REQUESTED,
+    POPULAR_MOVIES_RECEIVED
 } from '../actions'
 
 const defaultState = {
     searchResult: [],
     chosenMovie: null,
     savedMovies: [],
+    popularMovies: [],
     isLoadingDetails: false,
     savedMoviesWereLoaded: false
 }
@@ -40,6 +42,11 @@ const movies = (state = defaultState, action) => {
         case MOVIE_DELETE_SUCCESSFUL:
             return Object.assign({}, state, {
                 savedMovies: removeMovieFromArrayById(state.savedMovies, action.payload)
+            })
+        case POPULAR_MOVIES_RECEIVED:
+            debugger
+            return Object.assign({}, state, {
+                popularMovies: action.movies
             })
         default:
             return state

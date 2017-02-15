@@ -2,7 +2,8 @@ import {
     MOVIE_SEARCH_REQUESTED, MOVIE_SEARCH_SUCCESSFUL, SHOW_MOVIE_DETAILS,
     MOVIE_SAVE_REQUESTED, MOVIE_SAVE_SUCCESSFUL, SAVED_MOVIES_REQUESTED,
     SAVED_MOVIES_RECEIVED, MOVIE_DELETE_REQUESTED, MOVIE_DELETE_SUCCESSFUL,
-    MOVIE_DETAILS_REQUESTED, MOVIE_DETAILS_RECEIVED
+    MOVIE_DETAILS_REQUESTED, MOVIE_DETAILS_RECEIVED, POPULAR_MOVIES_RECEIVED,
+    POPULAR_MOVIES_REQUESTED
 } from './'
 import MovieRepo from '../repositories/movieRepo'
 
@@ -35,8 +36,8 @@ class MovieActions {
         return (dispatch) => {
             dispatch(MovieActions.movieDetailsRequested(id))
 
-            MovieRepo.getMovieDetails(id).then((response)=> {
-                if(response.status === 200) {
+            MovieRepo.getMovieDetails(id).then((response) => {
+                if (response.status === 200) {
                     dispatch(MovieActions.movieDetailsReceived(response.data))
                 } else {
                     //handle errors
@@ -63,7 +64,7 @@ class MovieActions {
         debugger
         return (dispatch) => {
             dispatch(MovieActions.movieSaveRequested())
-            
+
             MovieRepo.saveMovie(movie).then((response) => {
                 debugger
                 if (response.status === 200 && response.data) {
@@ -89,13 +90,13 @@ class MovieActions {
     }
 
     static getSavedMovies() {
-        
+
         return (dispatch) => {
             dispatch(MovieActions.savedMoviesRequested)
 
             MovieRepo.getSavedMovies().then((response) => {
-                
-                if(response.status === 200) {
+
+                if (response.status === 200) {
                     dispatch(MovieActions.savedMoviesReceived(response.data))
                 }
             })
@@ -115,31 +116,58 @@ class MovieActions {
         }
     }
 
-    static deleteMovie (id) {
+    static deleteMovie(id) {
         return (dispatch) => {
-            dispatch(MovieActions.movieDeleteRequested(id))   
+            dispatch(MovieActions.movieDeleteRequested(id))
 
-            MovieRepo.deleteMovie(id).then((response)=> {
-                if(response.data) {
+            MovieRepo.deleteMovie(id).then((response) => {
+                if (response.data) {
                     dispatch(MovieActions.movieDeleteSuccessful(id))
                 } else {
                     //handle errors
                 }
-            }) 
+            })
         }
     }
 
-    static movieDeleteRequested (id) {
+    static movieDeleteRequested(id) {
         return {
             type: MOVIE_DELETE_REQUESTED,
             payload: id
         }
     }
 
-    static movieDeleteSuccessful (id) {
+    static movieDeleteSuccessful(id) {
         return {
             type: MOVIE_DELETE_SUCCESSFUL,
             payload: id
+        }
+    }
+
+    static getPopularMovies() {
+        debugger
+        return (dispatch) => {
+            dispatch(MovieActions.popularMoviesRequested)
+
+            MovieRepo.getPopularMovies().then((response) => {
+                debugger
+                if (response.status === 200) {
+                    dispatch(MovieActions.popularMoviesReceived(response.data.results))
+                }
+            })
+        }
+    }
+
+    static popularMoviesRequested() {
+        return {
+            type: POPULAR_MOVIES_REQUESTED
+        }
+    }
+
+    static popularMoviesReceived(movies) {
+        return {
+            type: POPULAR_MOVIES_RECEIVED,
+            movies
         }
     }
 }
