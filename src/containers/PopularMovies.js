@@ -5,12 +5,16 @@ import MovieActions from '../actions/movieActions'
 import { browserHistory } from 'react-router'
 
 class PopularMovies extends React.Component {
+    constructor (props) {
+        super(props)
+        
+        this.onMovieClick = this.onMovieClick.bind(this)
+    }
     componentDidMount() {
+        debugger
         if (!this.props.savedMoviesWereLoaded) {
             this.props.dispatch(MovieActions.getPopularMovies())
         }
-
-        this.onMovieClick = this.onMovieClick.bind(this)
     }
 
     onMovieClick(id) {
