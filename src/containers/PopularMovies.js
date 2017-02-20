@@ -22,7 +22,7 @@ class PopularMovies extends React.Component {
         return (
             <div>
                 <MovieSlider movies={this.props.movies}
-                    onMovieClick={this.onMovieClick} />
+                    onMovieClick={this.onMovieClick(id)} />
             </div>
         )
     }
