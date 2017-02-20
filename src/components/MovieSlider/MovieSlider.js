@@ -4,9 +4,9 @@ import Carousel, {CarouselElement} from 'reactive-carousel'
 
 const MovieSlider = ({movies, onMovieClick}) => {
     if (movies.length > 0) {
-        debugger
         return (
-            <Carousel style={{ height: '400px' }}>
+            <Carousel autoplay={true}
+                      showAutoplayButton={true}>
                 {movies.map((movie) => {
                     return (
                         <CarouselElement imagePath={movie.poster_path ? `https://image.tmdb.org/t/p/w1000${movie.backdrop_path}` : 'http://lorempixel.com/200/300/abstract/'}
